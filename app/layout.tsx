@@ -48,6 +48,19 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${cormorant.variable} ${dmSerif.variable} ${lato.variable} h-full`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.pixelId = "6844d9846b0f75c03476cc94"; var a = document.createElement("script"); a.setAttribute("async", ""); a.setAttribute("defer", ""); a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js"); document.head.appendChild(a);`,
+          }}
+        />
+        <script
+          async
+          defer
+          src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+          data-utmify-prevent-subids=""
+        />
+      </head>
       <body className="min-h-full bg-bg-deep text-text-primary antialiased">
         <QuizProvider>{children}</QuizProvider>
       </body>
