@@ -202,25 +202,22 @@ export function calculateVenusSign(birthDateStr: string): VenusSign {
 
   if (isNaN(day) || isNaN(month) || isNaN(year)) return "Libra";
 
-  // Filtra entradas do ano de nascimento e anos adjacentes
-  const relevant = VENUS_TABLE.filter(
-    ([y]) => y === year
-  );
+  const birthDate = new Date(year, month - 1, day);
 
-  if (relevant.length === 0) {
-    // Fallback: calcular pelo mês
-    return getVenusByMonth(month);
-  }
+  // Percorre toda a tabela (em ordem cronológica) e pega a última entrada
+  // com data <= data de nascimento. Isso corrige o bug anterior que filtrava
+  // apenas o ano exato, retornando resultado errado para jan/fev quando a
+  // primeira entrada de Vênus daquele ano cai depois do dia de nascimento.
+  let sign: VenusSign | null = null;
 
-  // Encontra a última entrada com data <= data de nascimento
-  let sign: VenusSign = "Capricórnio";
-  for (const [y, m, d, s] of relevant) {
+  for (const [y, m, d, s] of VENUS_TABLE) {
     const entryDate = new Date(y, m - 1, d);
-    const birthDate = new Date(year, month - 1, day);
-    if (entryDate <= birthDate) {
-      sign = s;
-    }
+    if (entryDate > birthDate) break;
+    sign = s;
   }
+
+  // Fallback se data anterior à tabela (antes de 1975)
+  if (sign === null) return getVenusByMonth(month);
 
   return sign;
 }

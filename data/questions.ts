@@ -23,12 +23,14 @@ export interface Question {
 }
 
 export const questions: Question[] = [
+  // Q1 — data de nascimento (cálculo de Vênus)
   {
     id: 1,
     phase: "neutral",
     type: "date",
     text: "Para calcular a posição de Vênus no seu mapa, preciso saber quando você nasceu.",
   },
+  // Q2 — como terminaram os relacionamentos
   {
     id: 2,
     phase: "neutral",
@@ -41,6 +43,7 @@ export const questions: Question[] = [
       { key: "D", text: "Terminou de um jeito que me pegou de surpresa ou que eu não consegui entender direito.", score: 3 },
     ],
   },
+  // Q3 — tipo de homem que atrai
   {
     id: 3,
     phase: "recognition",
@@ -58,20 +61,9 @@ export const questions: Question[] = [
       text: "Quando li a opção C, senti um frio na barriga. Era exatamente o que eu sempre procurava sem admitir.",
     },
   },
+  // Q4 — quando o homem some (era Q5)
   {
     id: 4,
-    phase: "recognition",
-    type: "multiple",
-    text: "No começo de um relacionamento, como você costuma agir?",
-    answers: [
-      { key: "A", text: "Fico animada mas mantenho o ritmo — deixo as coisas se desenvolverem naturalmente.", score: 0 },
-      { key: "B", text: "Fico animada e demonstro interesse, mas ainda preservo meu espaço.", score: 1 },
-      { key: "C", text: "Fico muito animada e começo a organizar minha vida em torno da pessoa.", score: 2 },
-      { key: "D", text: "Fico animada mas com ansiedade — fico lendo mensagem, analisando o que ele faz.", score: 3 },
-    ],
-  },
-  {
-    id: 5,
     phase: "recognition",
     type: "multiple",
     text: "Quando o homem que você gosta some por um tempo ou fica menos presente, o que acontece com você?",
@@ -83,8 +75,9 @@ export const questions: Question[] = [
     ],
     strategicImageAfter: "woman-phone-night",
   },
+  // Q5 — homens em comum (era Q6)
   {
-    id: 6,
+    id: 5,
     phase: "mirror",
     type: "multiple",
     text: "Se você olhar para os homens com quem se envolveu seriamente, eles têm algo em comum?",
@@ -100,8 +93,9 @@ export const questions: Question[] = [
       text: "Fiz uma lista dos homens que eu amei de verdade. Cinco homens diferentes, mesma história. Não dá pra ser coincidência.",
     },
   },
+  // Q6 — homem bom sem tesão (era Q7) — TIEBREAKER
   {
-    id: 7,
+    id: 6,
     phase: "mirror",
     type: "multiple",
     text: "Já aconteceu de você ter um relacionamento com um homem bom, estável e presente — e não sentir o mesmo tesão ou atração que sentia pelos outros?",
@@ -112,21 +106,9 @@ export const questions: Question[] = [
       { key: "D", text: "Sim, e aí eu fui embora ou criei um distanciamento mesmo sabendo que ele era a escolha certa.", score: 3 },
     ],
   },
+  // Q7 — frase que se parece (era Q9) — última, mais poderosa emocionalmente
   {
-    id: 8,
-    phase: "mirror",
-    type: "multiple",
-    text: "Quando uma amiga te fala que o homem com quem você está envolvida não é bom pra você, o que normalmente acontece?",
-    answers: [
-      { key: "A", text: "Eu ouço, considero e, se fizer sentido, tomo uma decisão.", score: 0 },
-      { key: "B", text: "Ouço, mas preciso de mais tempo pra processar e só mudo quando eu mesma percebo.", score: 1 },
-      { key: "C", text: "Ouço, concordo em partes, mas continuo no relacionamento esperando o homem mudar.", score: 2 },
-      { key: "D", text: "Já sei o que vão falar antes de falar, mas continuo assim mesmo porque sinto que é diferente dessa vez.", score: 3 },
-    ],
-    strategicImageAfter: "friends-serious-talk",
-  },
-  {
-    id: 9,
+    id: 7,
     phase: "final",
     type: "multiple",
     text: "Qual dessas frases mais se parece com algo que você já pensou ou falou?",
@@ -141,17 +123,5 @@ export const questions: Question[] = [
       age: 27,
       text: "Quando vi essa pergunta, fiquei olhando para o D por uns 30 segundos. Porque é exatamente isso que eu falo quando conto pra alguém.",
     },
-  },
-  {
-    id: 10,
-    phase: "final",
-    type: "multiple",
-    text: "Se você descobrisse que o seu dedo podre não é azar nem fraqueza, mas um padrão específico com nome, causa e saída — o que você faria?",
-    answers: [
-      { key: "A", text: "Provavelmente não mudaria muita coisa. Cada relacionamento é diferente.", score: 0 },
-      { key: "B", text: "Ficaria curiosa, mas não sei se mudaria algo na prática.", score: 1 },
-      { key: "C", text: "Queria entender melhor. Se faz sentido, tentaria mudar.", score: 2 },
-      { key: "D", text: "Queria saber agora. Já cansei de repetir o mesmo ciclo.", score: 3 },
-    ],
   },
 ];

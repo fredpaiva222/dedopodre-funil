@@ -15,11 +15,14 @@ interface QuizState {
   profileId: ProfileId | null;
   profileSlug: string | null;
   isComplete: boolean;
+  leadName: string | null;
+  leadEmail: string | null;
 }
 
 type QuizAction =
   | { type: "ANSWER_QUESTION"; questionId: number; answer: AnswerKey }
   | { type: "SET_BIRTH_DATE"; date: string }
+  | { type: "SET_LEAD"; name: string; email: string }
   | { type: "NEXT_QUESTION" }
   | { type: "COMPLETE_QUIZ" }
   | { type: "RESTORE"; state: QuizState }
@@ -34,10 +37,14 @@ const initialState: QuizState = {
   profileId: null,
   profileSlug: null,
   isComplete: false,
+  leadName: null,
+  leadEmail: null,
 };
 
 function quizReducer(state: QuizState, action: QuizAction): QuizState {
   switch (action.type) {
+    case "SET_LEAD":
+      return { ...state, leadName: action.name, leadEmail: action.email };
     case "SET_BIRTH_DATE": {
       const venusSign = calculateVenusSign(action.date);
       return {
@@ -50,7 +57,7 @@ function quizReducer(state: QuizState, action: QuizAction): QuizState {
     }
     case "ANSWER_QUESTION": {
       const newAnswers = { ...state.answers, [action.questionId]: action.answer };
-      const isLast = action.questionId === 10;
+      const isLast = action.questionId === 7;
       if (isLast) {
         const profileId = determineProfile(newAnswers);
         const profileSlug = getProfileSlug(profileId);
