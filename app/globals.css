@@ -30,6 +30,9 @@
   --color-lavender: #F0D9FF;
   --color-lavender-soft: #D4C5E2;
 
+  /* Blur extra para paywall */
+  --blur-paywall: blur(8px);
+
   /* Fontes */
   --font-display: var(--font-cormorant), Georgia, serif;
   --font-serif: var(--font-dm-serif), Georgia, serif;

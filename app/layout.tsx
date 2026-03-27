@@ -27,12 +27,12 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
-  title: "Síndrome do Dedo Podre — Descubra seu padrão afetivo",
+  title: "Mapa da Alma Gêmea — Descubra seu padrão de atração",
   description:
-    "Em menos de 4 minutos, descubra o Ímã do Cara Errado: o padrão específico que faz você atrair sempre o mesmo tipo de homem. Quiz baseado em Vênus + estilo de apego.",
+    "Com base na posição exata de Vênus no momento do seu nascimento, o Mapa da Alma Gêmea revela seu padrão de atração, o perfil da sua alma gêmea e o que ativar agora para ser escolhida de verdade.",
   openGraph: {
-    title: "Síndrome do Dedo Podre",
-    description: "Você não tem dedo podre. Você tem um padrão que nunca te explicaram.",
+    title: "Mapa da Alma Gêmea",
+    description: "Você não estava errada. Você só ainda não tinha o mapa.",
     type: "website",
     locale: "pt_BR",
   },

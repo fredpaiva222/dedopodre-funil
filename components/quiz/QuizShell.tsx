@@ -8,19 +8,28 @@ import { questions } from "@/data/questions";
 import { AnswerKey } from "@/data/questions";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { AnswerOption } from "@/components/quiz/AnswerOption";
-import { DateBirthInput } from "@/components/quiz/DateBirthInput";
 import { SocialProof } from "@/components/quiz/SocialProof";
 import { LeadCapture } from "@/components/quiz/LeadCapture";
 import { Button } from "@/components/ui/Button";
 import { StarField } from "@/components/ui/StarField";
 
 const LOADING_STEPS = [
-  "Calculando a posição de Vênus...",
-  "Identificando posição sideral...",
-  "Cruzando com seu perfil emocional...",
-  "Mapeando o Ímã do Cara Errado...",
-  "Seu diagnóstico está pronto.",
+  "Localizando a posição de Vênus no momento do seu nascimento...",
+  "Calculando sua longitude natal com precisão sideral...",
+  "Identificando seu padrão de atração único...",
+  "Mapeando o perfil da sua alma gêmea...",
+  "Seu Mapa da Alma Gêmea está pronto.",
 ];
+
+const PHASE_LABELS: Record<string, string> = {
+  wound: "A ferida",
+  pattern: "O padrão",
+  shadow: "A sombra",
+  desire: "O desejo",
+  mirror: "O espelho",
+  fear: "O medo",
+  entry: "Entrada",
+};
 
 export function QuizShell() {
   const { state, dispatch } = useQuiz();
@@ -51,7 +60,7 @@ export function QuizShell() {
         clearInterval(interval);
         router.push("/resultado-parcial");
       }
-    }, 900);
+    }, 1100);
     return () => clearInterval(interval);
   }, [state.isComplete, router]);
 
@@ -61,8 +70,22 @@ export function QuizShell() {
     setShowSocialProof(false);
   }, [state.currentQuestion]);
 
-  function handleLeadContinue(name: string, email: string) {
-    dispatch({ type: "SET_LEAD", name, email });
+  function handleLeadContinue(params: {
+    name: string;
+    email: string;
+    birthDate: string;
+    birthTime: string;
+    birthCity: string;
+    birthTimezone: string;
+  }) {
+    dispatch({ type: "SET_LEAD", name: params.name, email: params.email });
+    dispatch({
+      type: "SET_BIRTH_DATA",
+      date: params.birthDate,
+      time: params.birthTime,
+      city: params.birthCity,
+      timezone: params.birthTimezone,
+    });
     setLeadCaptured(true);
   }
 
@@ -75,9 +98,25 @@ export function QuizShell() {
   if (isAnalyzing) {
     return (
       <div className="min-h-screen bg-bg-deep flex flex-col items-center justify-center px-6 relative overflow-hidden">
-        <StarField count={80} />
+        <StarField count={100} />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 60% 60% at 50% 50%, rgba(155,110,168,0.12) 0%, transparent 70%)",
+          }}
+        />
         <div className="relative z-10 text-center space-y-8 w-full max-w-sm">
-          <div className="w-16 h-16 mx-auto border-2 border-gold/30 border-t-gold rounded-full animate-spin" />
+          {/* Spinner cósmico */}
+          <div className="relative w-20 h-20 mx-auto">
+            <div className="absolute inset-0 rounded-full border-2 border-gold/10" />
+            <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-gold animate-spin" />
+            <div className="absolute inset-2 rounded-full border border-amethyst/20 border-b-amethyst animate-spin" style={{ animationDuration: "2s", animationDirection: "reverse" }} />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-gold text-lg">♀</span>
+            </div>
+          </div>
+
           <div className="space-y-3">
             <AnimatePresence mode="wait">
               <motion.p
@@ -86,23 +125,28 @@ export function QuizShell() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.4 }}
-                className="font-display text-xl text-gold"
+                className="font-display text-lg text-gold leading-snug"
               >
                 {LOADING_STEPS[loadingStep]}
               </motion.p>
             </AnimatePresence>
             {state.venusSign && (
-              <p className="font-sans text-sm text-text-muted">
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="font-sans text-sm text-text-muted"
+              >
                 Vênus em {state.venusSign} · {state.leadName}
-              </p>
+              </motion.p>
             )}
           </div>
+
           {/* Barra de progresso do loading */}
-          <div className="w-full bg-gold/10 rounded-full h-1">
+          <div className="w-full bg-gold/10 rounded-full h-0.5">
             <motion.div
-              className="bg-gold h-1 rounded-full"
+              className="bg-gold h-0.5 rounded-full"
               animate={{ width: `${((loadingStep + 1) / LOADING_STEPS.length) * 100}%` }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              transition={{ duration: 1, ease: "easeOut" }}
             />
           </div>
         </div>
@@ -127,10 +171,6 @@ export function QuizShell() {
     dispatch({ type: "ANSWER_QUESTION", questionId: currentQ!.id, answer: selected });
   }
 
-  function handleDateConfirm(date: string) {
-    dispatch({ type: "SET_BIRTH_DATE", date });
-  }
-
   return (
     <div className="min-h-screen bg-bg-deep flex flex-col relative overflow-hidden">
       <StarField count={40} />
@@ -152,11 +192,8 @@ export function QuizShell() {
             className="space-y-6"
           >
             {/* Fase label */}
-            <p className="font-sans text-xs text-text-muted uppercase tracking-widest">
-              {currentQ.phase === "neutral" && "Contexto"}
-              {currentQ.phase === "recognition" && "Reconhecimento"}
-              {currentQ.phase === "mirror" && "Espelho"}
-              {currentQ.phase === "final" && "Revelação"}
+            <p className="font-sans text-xs text-amethyst uppercase tracking-widest">
+              {PHASE_LABELS[currentQ.phase] ?? currentQ.phase}
             </p>
 
             {/* Pergunta */}
@@ -164,22 +201,18 @@ export function QuizShell() {
               {currentQ.text}
             </h2>
 
-            {/* Input de data ou opções */}
-            {currentQ.type === "date" ? (
-              <DateBirthInput onConfirm={handleDateConfirm} />
-            ) : (
-              <div className="space-y-3">
-                {currentQ.answers?.map((answer) => (
-                  <AnswerOption
-                    key={answer.key}
-                    answerKey={answer.key}
-                    text={answer.text}
-                    selected={selected === answer.key}
-                    onSelect={handleAnswer}
-                  />
-                ))}
-              </div>
-            )}
+            {/* Opções */}
+            <div className="space-y-3">
+              {currentQ.answers.map((answer) => (
+                <AnswerOption
+                  key={answer.key}
+                  answerKey={answer.key}
+                  text={answer.text}
+                  selected={selected === answer.key}
+                  onSelect={handleAnswer}
+                />
+              ))}
+            </div>
 
             {/* Prova social pós-resposta */}
             {showSocialProof && currentQ.socialProofAfter && (
@@ -192,8 +225,8 @@ export function QuizShell() {
               </motion.div>
             )}
 
-            {/* Botão continuar (só para perguntas de múltipla escolha) */}
-            {currentQ.type === "multiple" && selected && (
+            {/* Botão continuar */}
+            {selected && (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -216,7 +249,7 @@ export function QuizShell() {
       {/* Footer */}
       <div className="relative z-10 px-6 pb-8 max-w-lg mx-auto w-full">
         <p className="font-sans text-xs text-text-muted text-center">
-          Seja honesta. Não existe resposta errada.
+          Seja honesta. Não existe resposta certa ou errada.
         </p>
       </div>
     </div>

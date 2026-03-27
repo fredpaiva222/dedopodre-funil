@@ -3,7 +3,6 @@ export type AnswerKey = "A" | "B" | "C" | "D";
 export interface Answer {
   key: AnswerKey;
   text: string;
-  score: number;
 }
 
 export interface SocialProofData {
@@ -14,114 +13,152 @@ export interface SocialProofData {
 
 export interface Question {
   id: number;
-  phase: "neutral" | "recognition" | "mirror" | "final";
+  phase: "entry" | "wound" | "pattern" | "desire" | "shadow" | "mirror" | "fear";
   text: string;
-  type: "date" | "multiple";
-  answers?: Answer[];
+  type: "multiple";
+  answers: Answer[];
   socialProofAfter?: SocialProofData;
-  strategicImageAfter?: string;
 }
 
 export const questions: Question[] = [
-  // Q1 — data de nascimento (cálculo de Vênus)
   {
     id: 1,
-    phase: "neutral",
-    type: "date",
-    text: "Para calcular a posição de Vênus no seu mapa, preciso saber quando você nasceu.",
+    phase: "wound",
+    text: "Pensa num relacionamento que terminou e que você ainda carrega. O que dói mais quando você pensa nele hoje?",
+    type: "multiple",
+    answers: [
+      { key: "A", text: "A sensação de que eu dei tudo e não foi suficiente" },
+      { key: "B", text: "Não entender até hoje o que realmente aconteceu" },
+      { key: "C", text: "Saber que eu vi os sinais e fiquei mesmo assim" },
+      { key: "D", text: "A pergunta que nunca saiu da minha cabeça: \"e se eu tivesse feito diferente?\"" },
+    ],
   },
-  // Q2 — como terminaram os relacionamentos
   {
     id: 2,
-    phase: "neutral",
+    phase: "pattern",
+    text: "Quando alguém que você gosta começa a se distanciar, antes mesmo de confirmar que algo mudou, qual é sua reação mais honesta?",
     type: "multiple",
-    text: "Pensando nos seus últimos dois ou três relacionamentos — como a maioria deles terminou?",
     answers: [
-      { key: "A", text: "Terminamos por incompatibilidade, sem muita dor dos dois lados.", score: 0 },
-      { key: "B", text: "Eu terminei porque percebi que não estava me fazendo bem.", score: 1 },
-      { key: "C", text: "O relacionamento foi acabando aos poucos e eu fui a última a aceitar.", score: 2 },
-      { key: "D", text: "Terminou de um jeito que me pegou de surpresa ou que eu não consegui entender direito.", score: 3 },
+      { key: "A", text: "Fico quieta e espero, mesmo que por dentro esteja em colapso" },
+      { key: "B", text: "Começo a procurar o que eu fiz de errado" },
+      { key: "C", text: "Aumento a atenção, tento me tornar mais presente, mais necessária" },
+      { key: "D", text: "Me afasto primeiro. Prefiro controlar minha saída do que ser abandonada" },
     ],
+    socialProofAfter: {
+      name: "Fernanda",
+      age: 31,
+      text: "Quando vi essa pergunta, tive que parar. Eu faço isso toda vez e nunca tinha colocado em palavras.",
+    },
   },
-  // Q3 — tipo de homem que atrai
   {
     id: 3,
-    phase: "recognition",
+    phase: "shadow",
+    text: "Existe uma versão de você que aparece só quando você se sente realmente amada, mais leve, mais ela mesma, menos armada. Com que frequência essa versão aparece nos seus relacionamentos?",
     type: "multiple",
-    text: "Quando você se apaixona, que tipo de homem normalmente te chama mais atenção?",
     answers: [
-      { key: "A", text: "Homem estável, carinhoso, que deixa claro o que quer.", score: 0 },
-      { key: "B", text: "Homem confiante, um pouco misterioso, que não facilita.", score: 1 },
-      { key: "C", text: "Homem intenso, que mistura momentos incríveis com momentos de distância.", score: 2 },
-      { key: "D", text: "Homem que parece precisar de você de alguma forma, mesmo que não verbalize.", score: 3 },
+      { key: "A", text: "Raramente. Preciso mostrar que estou bem antes de me abrir" },
+      { key: "B", text: "No começo sim, mas com o tempo acabo me fechando de volta" },
+      { key: "C", text: "Ela aparece, mas eu a afasto. Tenho medo do que acontece quando me permito ser vista assim" },
+      { key: "D", text: "Quase nunca. Não sei se já confiei em alguém o suficiente para isso" },
     ],
-    socialProofAfter: {
-      name: "Rafaela",
-      age: 31,
-      text: "Quando li a opção C, senti um frio na barriga. Era exatamente o que eu sempre procurava sem admitir.",
-    },
   },
-  // Q4 — quando o homem some (era Q5)
   {
     id: 4,
-    phase: "recognition",
+    phase: "desire",
+    text: "Quando você imagina um relacionamento verdadeiro, não o conto de fadas, mas o amor real do dia a dia, o que você mais deseja sentir?",
     type: "multiple",
-    text: "Quando o homem que você gosta some por um tempo ou fica menos presente, o que acontece com você?",
     answers: [
-      { key: "A", text: "Fico chateada mas respeito o espaço. Se sumir demais, passo à frente.", score: 0 },
-      { key: "B", text: "Fico um pouco ansiosa mas consigo segurar. Mando uma mensagem e espero.", score: 1 },
-      { key: "C", text: "Fico muito ansiosa, começo a criar hipóteses, analiso tudo que ele fez nos últimos dias.", score: 2 },
-      { key: "D", text: "Fico obcecada, fico verificando o status dele, conto os dias desde a última mensagem.", score: 3 },
-    ],
-    strategicImageAfter: "woman-phone-night",
-  },
-  // Q5 — homens em comum (era Q6)
-  {
-    id: 5,
-    phase: "mirror",
-    type: "multiple",
-    text: "Se você olhar para os homens com quem se envolveu seriamente, eles têm algo em comum?",
-    answers: [
-      { key: "A", text: "Não muito. Foram bem diferentes entre si.", score: 0 },
-      { key: "B", text: "Talvez uma característica ou outra, mas não é um padrão claro.", score: 1 },
-      { key: "C", text: "Sim, alguns padrões claros — tipo de personalidade, jeito de tratar ou de terminar.", score: 2 },
-      { key: "D", text: "Sim, e quando eu percebo isso fico perturbada porque parece que é sempre o mesmo homem com rostos diferentes.", score: 3 },
+      { key: "A", text: "Que sou escolhida todos os dias, mesmo quando não estou no meu melhor" },
+      { key: "B", text: "Que posso ser completamente honesta sem medo de afastar" },
+      { key: "C", text: "Que existe alguém que me entende sem que eu precise explicar tudo" },
+      { key: "D", text: "Que minha presença faz diferença na vida dele, que eu importo de verdade" },
     ],
     socialProofAfter: {
-      name: "Carla",
-      age: 38,
-      text: "Fiz uma lista dos homens que eu amei de verdade. Cinco homens diferentes, mesma história. Não dá pra ser coincidência.",
+      name: "Camila",
+      age: 27,
+      text: "Chorei lendo as opções. Eu nunca soube nomear o que queria. Agora sei.",
     },
   },
-  // Q6 — homem bom sem tesão (era Q7) — TIEBREAKER
+  {
+    id: 5,
+    phase: "shadow",
+    text: "Tem algo que você sente mas raramente fala, uma forma de amar que parece intensa demais, estranha demais, que as pessoas ao redor não entendem. Qual dessas mais se aproxima?",
+    type: "multiple",
+    answers: [
+      { key: "A", text: "Eu amo com uma profundidade que assusta as pessoas, e me assusta também" },
+      { key: "B", text: "Consigo sentir quando algo vai mudar antes de acontecer, e fico em silêncio com isso" },
+      { key: "C", text: "Quando me apego, me apego de verdade. Não consigo amar pela metade" },
+      { key: "D", text: "Me importo tanto que às vezes perco a mim mesma para não perder o outro" },
+    ],
+  },
   {
     id: 6,
     phase: "mirror",
+    text: "Pensa no último homem por quem você se apaixonou de verdade. Sem romantizar, o que você via nele que, lá no fundo, te dizia que ia ser difícil?",
     type: "multiple",
-    text: "Já aconteceu de você ter um relacionamento com um homem bom, estável e presente — e não sentir o mesmo tesão ou atração que sentia pelos outros?",
     answers: [
-      { key: "A", text: "Não, nunca senti isso.", score: 0 },
-      { key: "B", text: "Uma vez ou outra, mas não sei se era o relacionamento ou a pessoa específica.", score: 1 },
-      { key: "C", text: "Sim, já aconteceu. Sabia que ele era bom pra mim mas faltava algo.", score: 2 },
-      { key: "D", text: "Sim, e aí eu fui embora ou criei um distanciamento mesmo sabendo que ele era a escolha certa.", score: 3 },
-    ],
-  },
-  // Q7 — frase que se parece (era Q9) — última, mais poderosa emocionalmente
-  {
-    id: 7,
-    phase: "final",
-    type: "multiple",
-    text: "Qual dessas frases mais se parece com algo que você já pensou ou falou?",
-    answers: [
-      { key: "A", text: "\"Acho que ainda não encontrei a pessoa certa.\"", score: 0 },
-      { key: "B", text: "\"Sempre me envolvo com homens que não estão prontos.\"", score: 1 },
-      { key: "C", text: "\"Não entendo por que isso sempre acontece comigo.\"", score: 2 },
-      { key: "D", text: "\"Eu sei que tenho dedo podre. Isso é um negócio meu mesmo.\"", score: 3 },
+      { key: "A", text: "Que ele não estava pronto para o tipo de amor que eu tenho para dar" },
+      { key: "B", text: "Que ele me via, mas não completamente, só a parte que era conveniente" },
+      { key: "C", text: "Que eu era mais investida do que ele, e sabia disso desde o início" },
+      { key: "D", text: "Que eu estava repetindo um padrão, mas entrei mesmo assim, como se não pudesse evitar" },
     ],
     socialProofAfter: {
-      name: "Letícia",
-      age: 27,
-      text: "Quando vi essa pergunta, fiquei olhando para o D por uns 30 segundos. Porque é exatamente isso que eu falo quando conto pra alguém.",
+      name: "Juliana",
+      age: 34,
+      text: "Essa pergunta me pegou desprevenida. Eu sabia. Desde o começo eu sabia.",
     },
+  },
+  {
+    id: 7,
+    phase: "fear",
+    text: "Quando você está sozinha e honesta consigo mesma, o que você mais tem medo que seja verdade sobre o amor na sua vida?",
+    type: "multiple",
+    answers: [
+      { key: "A", text: "Que eu já errei minha chance e não vou encontrar mais" },
+      { key: "B", text: "Que algo em mim afasta as pessoas antes que elas cheguem perto o suficiente" },
+      { key: "C", text: "Que eu nunca vou ser amada da forma que preciso, que esse amor não existe para mim" },
+      { key: "D", text: "Que eu já encontrei, mas não estava pronta, e agora é tarde" },
+    ],
+  },
+  {
+    id: 8,
+    phase: "pattern",
+    text: "Como você se relaciona com a ideia de pedir o que precisa num relacionamento?",
+    type: "multiple",
+    answers: [
+      { key: "A", text: "Raramente peço, espero que a pessoa perceba por conta própria" },
+      { key: "B", text: "Peço, mas depois fico me sentindo culpada ou exagerada" },
+      { key: "C", text: "Aprendi a não pedir. Já me decepcionei vezes demais quando pedi" },
+      { key: "D", text: "Peço, mas na hora diminuo o pedido, nunca peço o que realmente quero" },
+    ],
+  },
+  {
+    id: 9,
+    phase: "desire",
+    text: "Existe alguém cujo relacionamento te faz pensar \"é isso que eu quero\". O que você mais deseja nessa conexão?",
+    type: "multiple",
+    answers: [
+      { key: "A", text: "A forma como ele a escolhe publicamente, sem hesitar, sem deixar dúvidas" },
+      { key: "B", text: "A leveza, eles erram, mas tem um fundamento que não quebra" },
+      { key: "C", text: "A intimidade real, parece que se conhecem de verdade, sem máscaras" },
+      { key: "D", text: "O fato de ela ser amada do jeito que é, sem precisar se adaptar" },
+    ],
+    socialProofAfter: {
+      name: "Mariana",
+      age: 29,
+      text: "Tenho uma amiga assim. Faz anos que eu olho pra ela e penso: quero isso. Agora entendo o que faltava em mim.",
+    },
+  },
+  {
+    id: 10,
+    phase: "mirror",
+    text: "Se sua alma gêmea chegasse hoje, a conexão que você sempre soube que era possível, qual seria seu maior obstáculo para recebê-la?",
+    type: "multiple",
+    answers: [
+      { key: "A", text: "Não acreditar que mereço esse tipo de amor" },
+      { key: "B", text: "Não saber reconhecê-la, confundo intensidade com compatibilidade" },
+      { key: "C", text: "O medo de me abrir de novo depois de tudo que já passei" },
+      { key: "D", text: "Uma voz que me diz que isso só acontece para as outras, nunca para mim" },
+    ],
   },
 ];

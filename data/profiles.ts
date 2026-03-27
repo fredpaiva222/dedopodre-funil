@@ -4,154 +4,179 @@ export interface Profile {
   id: ProfileId;
   slug: string;
   name: string;
-  scoreRange: [number, number];
-  p7RequireCD: boolean;
+  // Exibido na página de resultado parcial (antes do paywall)
   teaser: string;
+  // Exibido após desbloqueio (resultado completo)
   fullDescription: string;
-  manType: string;
-  whyCycleRepeats: string;
-  firstStep: string;
+  // Perfil da alma gêmea (parcialmente visível no resultado parcial)
+  soulMateProfile: string;
+  // Padrão de atração identificado
+  attractionPattern: string;
+  // Red flags astrológicos específicos deste perfil
+  redFlags: string[];
+  // Janela cósmica: momento favorável para conexão
+  cosmicWindow: string;
 }
 
 export const profiles: Profile[] = [
   {
     id: "1A",
-    slug: "padrao-oculto",
-    name: "A que ainda não enxergou o padrão",
-    scoreRange: [0, 7],
-    p7RequireCD: true,
+    slug: "amor-invisivel",
+    name: "A que ama em silêncio",
     teaser:
-      "Você ainda está nos primeiros anos de reconhecimento. Seus relacionamentos não foram todos ruins — alguns foram genuinamente bons. O ciclo existe, mas não é forte o suficiente para ter criado uma crença fixada sobre si mesma.\n\nO perigo aqui não é o padrão já instalado. É o padrão que está se formando.",
+      "Você carrega um amor enorme dentro de você, mas aprendeu a escondê-lo antes de saber se é seguro mostrá-lo. Você dá sinais sutis demais para alguém que ainda não sabe o quanto você sente.",
     fullDescription:
-      "Porque o Ímã do Cara Errado funciona como uma trilha: quanto mais vezes você passa pelo mesmo caminho, mais fácil fica percorrê-lo sem perceber. Você está num momento raro — ainda tem a clareza para ver o padrão antes que ele se torne automático.\n\nSua posição de Vênus revela que você busca conexão genuína, mas ainda confunde potencial com realidade. Você vê o que o homem poderia ser, não o que ele é hoje. E esse gap é onde o ciclo começa.",
-    manType:
-      "Homens imaturos emocionalmente — não necessariamente malvados, mas que não estão prontos para o que você precisa. O problema não é intensidade — é compatibilidade de momento.",
-    whyCycleRepeats:
-      "Você ainda confunde potencial com realidade. Você vê o que o homem poderia ser, não o que ele é hoje.",
-    firstStep:
-      "Antes de se envolver, faça uma pergunta simples: \"Esse homem está disponível para o que eu preciso agora?\" Não no futuro. Agora.",
+      "Seu padrão de atração é marcado por uma generosidade emocional que funciona de forma quase invisível. Você ama com profundidade, mas protege esse amor com uma camada de reserva que os outros às vezes interpretam como desinteresse. A raiz desse padrão está numa experiência precoce de amor não reconhecido — você aprendeu que mostrar demais é arriscado. O resultado é que você se apaixona em silêncio e espera que o outro perceba sem que você precise dizer. Sua alma gêmea precisa ser alguém com sensibilidade suficiente para ler o que não é dito.",
+    soulMateProfile:
+      "Seu mapa indica compatibilidade com alguém de presença tranquila e observadora, que não confunde reserva com frieza. Alguém que escolhe com cuidado e fica com consistência.",
+    attractionPattern:
+      "Você tende a se apaixonar por pessoas que precisam ser decifradas, o que cria uma dinâmica onde você investe mais do que recebe antes de qualquer reciprocidade ser estabelecida.",
+    redFlags: [
+      "Homens que comunicam pouco e interpretam seu silêncio como aprovação",
+      "Relações onde a ambiguidade é mantida porque nenhum dos dois quer quebrar o equilíbrio frágil",
+      "Pessoas que admiram você de longe mas nunca dão o passo",
+    ],
+    cosmicWindow:
+      "Nos próximos 90 dias, Vênus favorece conexões iniciadas por você. Sua próxima alma gêmea pode não ser quem toma a iniciativa.",
   },
   {
     id: "1B",
-    slug: "protege-demais",
-    name: "A que se protege demais",
-    scoreRange: [0, 7],
-    p7RequireCD: false,
+    slug: "guardia-do-proprio-coracao",
+    name: "A guardiã do próprio coração",
     teaser:
-      "Você aprendeu cedo que se abrir demais dói. Então você criou um filtro — consciente ou não — que afasta homens muito presentes. Não é que você não queira amor. É que amor muito próximo ativa um alarme que você ainda não sabe explicar.\n\nO resultado prático é que você costuma se dar bem com homens que têm vida própria, são independentes.",
+      "Você construiu uma proteção tão eficiente que às vezes ela funciona bem demais. Você mantém as pessoas numa distância confortável e só percebe que se afastou quando já é tarde demais.",
     fullDescription:
-      "E que, na prática, não constroem intimidade de verdade. Você chama isso de ser independente também. Na verdade, é uma forma de manter o amor a uma distância segura.\n\nSeu Ímã do Cara Errado opera de forma diferente dos outros padrões: não é que você vai atrás do errado. É que você descarta o certo antes de ele chegar perto demais.",
-    manType:
-      "Homens independentes ao extremo, que valorizam espaço — e que não vão exigir de você o que você ainda não está pronta para dar.",
-    whyCycleRepeats:
-      "Você busca segurança na distância. Intimidade real parece arriscada.",
-    firstStep:
-      "Da próxima vez que um homem presente e cuidadoso aparecer, observe o impulso de recuar. Não precisa agir diferente ainda. Só observa.",
+      "Seu padrão é marcado por uma inteligência emocional aguçada que você usa principalmente para se proteger. Você sente tudo com intensidade, mas desenvolveu um sistema interno sofisticado de avaliação que filtra ameaças antes de se abrir. O problema é que esse filtro eventualmente exclui conexões legítimas. Você não tem medo de se apaixonar — você tem medo do que acontece depois, quando a pessoa já está dentro e pode te machucar de verdade. Sua alma gêmea precisa ser alguém paciente o suficiente para entender que sua abertura é progressiva, não ausente.",
+    soulMateProfile:
+      "Seu mapa aponta para alguém com segurança emocional interna, que não interpreta sua cautela como rejeição e tem consistência suficiente para mostrar que vale a pena baixar a guarda.",
+    attractionPattern:
+      "Você tende a criar testes inconscientes para as pessoas, e quando elas falham, usa isso como confirmação de que era melhor não ter se aberto. O padrão se retroalimenta.",
+    redFlags: [
+      "Homens que desistem ao primeiro sinal de resistência sua",
+      "Relações que ficam presas na fase de 'quase', onde os dois sentem mas nenhum assume",
+      "Pessoas que confundem sua independência com ausência de necessidade de cuidado",
+    ],
+    cosmicWindow:
+      "Seu mapa indica que uma conexão genuína está sendo bloqueada por uma proteção que já cumpriu seu papel. Os próximos 90 dias são favoráveis para deixar alguém ver o que você normalmente esconde.",
   },
   {
     id: "2A",
-    slug: "salva-quem-nao-quer",
-    name: "A que salva quem não quer ser salvo",
-    scoreRange: [8, 15],
-    p7RequireCD: true,
+    slug: "redentora",
+    name: "A que acredita no potencial",
     teaser:
-      "Você tem um talento incrível para enxergar o potencial nas pessoas. O problema é que você se apaixona pelo que o homem poderia ser — e fica nos relacionamentos tentando ajudá-lo a chegar lá.\n\nEnquanto isso, você vai se desgastando, esperando uma virada que nunca vem.",
+      "Você tem um dom raro de enxergar o que as pessoas podem se tornar. Isso te faz investir em quem ainda está se construindo — e às vezes esperar por uma versão da pessoa que ainda não existe.",
     fullDescription:
-      "E quando termina você sente que falhou — sendo que o problema nunca foi você. Seu Ímã do Cara Errado foi formado em um ambiente onde você aprendeu que amor é cuidar do outro acima de si mesma. Sentir que o outro precisa de você ativa a atração — não porque você seja ingênua, mas porque isso é o que parece amor para você.\n\nA posição de Vênus no seu mapa confirma esse padrão: você busca conexão através do cuidado. E homens que não precisam de cuidado parecem vazios.",
-    manType:
-      "Homens com potencial não realizado, que estão sempre \"passando por uma fase\", que precisam de apoio emocional, financeiro ou de direção. Homens que te fazem sentir necessária.",
-    whyCycleRepeats:
-      "Seu Ímã do Cara Errado foi formado em um ambiente onde você aprendeu que amor é cuidar do outro acima de si mesma.",
-    firstStep:
-      "Faça uma pergunta diferente logo no início: \"Esse homem está me tratando bem agora — não no potencial, não no futuro — agora?\"",
+      "Você ama o potencial tanto quanto a realidade, às vezes mais. Isso não é ingenuidade — é uma forma de amor genuinamente generosa. O problema aparece quando você começa a sustentar sozinha a crença em alguém que não sustenta essa crença em si mesmo. Você carrega o projeto do relacionamento enquanto o outro ainda decide se quer estar nele. Sua alma gêmea não é alguém que precisa ser salvo — é alguém que já chegou até você pronto para o que você tem a oferecer.",
+    soulMateProfile:
+      "Seu mapa aponta para alguém que já passou pelos próprios processos e chegou até você com clareza de quem é. Não perfeito, mas inteiro. Alguém que escolhe você com consciência, não por precisar de você.",
+    attractionPattern:
+      "Você é atraída por pessoas que têm algo brilhante e algo quebrado ao mesmo tempo. O brilhante te encanta, o quebrado te convoca. E você fica dividida entre os dois.",
+    redFlags: [
+      "Homens com muito potencial e pouca ação consistente",
+      "Relações onde você sente que é a âncora emocional enquanto o outro flutua",
+      "Pessoas que te agradecem mas não mudam",
+    ],
+    cosmicWindow:
+      "Nos próximos 90 dias, seu mapa indica que uma conexão diferente está disponível: alguém que não precisa que você acredite por ele, porque já acredita em si mesmo.",
   },
   {
     id: "2B",
-    slug: "espera-ser-escolhida",
+    slug: "a-que-espera-ser-escolhida",
     name: "A que espera ser escolhida",
-    scoreRange: [8, 15],
-    p7RequireCD: false,
     teaser:
-      "Você gosta de ser cortejada. Você se sente mais confortável quando o homem toma a iniciativa, persiste e demonstra interesse. O problema é que essa dinâmica cria um filtro que te faz confundir insistência com amor.\n\nO homem que mais te atrai é aquele que parece ocupado, que te faz esperar um pouco, que não entrega fácil.",
+      "Você tem muito a oferecer e sabe disso. Mas em algum momento aprendeu a esperar que o outro reconheça isso sozinho, sem que você precise se posicionar. E essa espera às vezes dura mais do que deveria.",
     fullDescription:
-      "Você chama isso de atração. Na prática, é ansiedade ativando o seu sistema de apego.\n\nSeu Ímã do Cara Errado opera através da lógica de conquista: você aprendeu que amor é algo que você tem que merecer, que conquistar, que provar que é digna de receber. Então homem fácil demais parece suspeito. Homem difícil parece desafiador — e você é boa em desafios.",
-    manType:
-      "Homens que controlam o ritmo do relacionamento, que dão e tiram atenção, que são imprevisíveis o suficiente para manter o sistema emocional dela em estado de alerta.",
-    whyCycleRepeats:
-      "Você aprendeu que amor é algo que você tem que merecer. Então homem fácil demais parece suspeito.",
-    firstStep:
-      "Comece a separar atração de ansiedade. Quando sentir aquele frio na barriga por causa de um homem, pergunte: \"Estou ansiosa ou estou atraída?\"",
+      "Você aprendeu em algum momento que se destacar demais é perigoso. Que querer demais afasta. Então você se posiciona de uma forma que parece passiva mas é na verdade uma estratégia: estar disponível, ser agradável, mostrar que você é uma boa escolha — e esperar que ele escolha. O problema é que esse padrão seleciona homens que precisam de pouco esforço, não homens que são capazes de grande amor. Sua alma gêmea é alguém que te escolhe ativamente, não alguém que você convence de que vale a pena ficar.",
+    soulMateProfile:
+      "Seu mapa indica compatibilidade com alguém que faz escolhas deliberadas e não deixa espaço para ambiguidade. Alguém que diz o que sente antes que você precise adivinhar.",
+    attractionPattern:
+      "Você se apaixona mais profundamente por quem dá pouca certeza do que por quem é claro. A incerteza cria uma tensão que você interpreta como sentimento intenso.",
+    redFlags: [
+      "Homens que mantêm a ambiguidade porque ela funciona a favor deles",
+      "Relações onde você analisa cada mensagem em busca de sinais de interesse",
+      "Pessoas que aparecem e somem em ciclos que você aprende a tolerar",
+    ],
+    cosmicWindow:
+      "Nos próximos 90 dias, seu mapa aponta para uma conexão onde você não precisará interpretar sinais. O que é para você chega com clareza.",
   },
   {
     id: "3A",
-    slug: "cria-proprio-abandono",
-    name: "A que cria o próprio abandono",
-    scoreRange: [16, 23],
-    p7RequireCD: true,
+    slug: "criadora-de-distancia",
+    name: "A que se afasta quando chega perto",
     teaser:
-      "Você odeia ser abandonada. Então, de forma completamente inconsciente, você aprende a se comportar de formas que acabam fazendo exatamente isso acontecer. Você cobra antes de ter razão para cobrar. Você afasta quando está com medo de ser afastada.\n\nVocê testa sem perceber que está testando.",
+      "Você deseja profundamente ser amada, mas quando o amor se aproxima de verdade, algo em você começa a recuar. Não por falta de sentimento, mas por excesso de medo do que acontece se você se permitir confiar completamente.",
     fullDescription:
-      "E quando o homem falha no teste, você tem a confirmação do que já esperava. Seu Ímã do Cara Errado foi construído em torno do medo do abandono. Então você inconscientemente escolhe situações que confirmam esse medo — porque o cérebro prefere o familiar ao desconhecido, mesmo que o familiar seja doloroso.\n\nSua posição de Vênus revela uma sensibilidade emocional profunda que, sem direção, se transforma em hipervigilância nos relacionamentos.",
-    manType:
-      "Homens com padrão evitativo — que se fecham quando a pressão aumenta. Exatamente o oposto do que você precisa, e exatamente o que confirma o que você mais teme.",
-    whyCycleRepeats:
-      "Seu Ímã do Cara Errado foi construído em torno do medo do abandono. Você inconscientemente escolhe situações que confirmam esse medo.",
-    firstStep:
-      "Identifique o momento em que você começa a testar o homem. Não julgue. Só observe. Esse é o ponto onde o ciclo começa a girar.",
+      "Você tem um ciclo interno sofisticado: se apaixona, se abre, sente o risco, recua. Às vezes o recuo é sutil — você fica mais ocupada, menos presente, mais crítica. Às vezes é explícito — você termina ou provoca o fim antes que ele aconteça sem o seu controle. No fundo, você sabe que esse padrão existe. A questão não é entendê-lo, é ter alguém seguro o suficiente para que você não precise ativá-lo. Sua alma gêmea é alguém cuja presença não dispara o seu alarme interno.",
+    soulMateProfile:
+      "Seu mapa indica que sua alma gêmea tem uma estabilidade emocional que não reage às suas oscilações com insegurança ou afastamento. Alguém que permanece sem sufocar.",
+    attractionPattern:
+      "Você tende a ser mais atraída por pessoas que mantêm certa distância, porque isso mantém o relacionamento num nível de segurança onde você controla o quanto se expõe.",
+    redFlags: [
+      "Homens emocionalmente indisponíveis que espelham seu próprio afastamento",
+      "Relações que parecem intensas mas nunca avançam para profundidade real",
+      "Pessoas que interpretam seu recuo como jogo e reforçam o ciclo",
+    ],
+    cosmicWindow:
+      "Seu mapa indica que nos próximos 90 dias uma conexão vai te desafiar a ficar quando seu instinto disser para ir. Esse momento é o ponto de virada.",
   },
   {
     id: "3B",
-    slug: "apaga-si-mesma",
-    name: "A que apaga a si mesma por amor",
-    scoreRange: [16, 23],
-    p7RequireCD: false,
+    slug: "a-que-se-apaga",
+    name: "A que se apaga para não perder",
     teaser:
-      "Você tem uma capacidade enorme de adaptação. Você aprende a gostar do que o outro gosta. Você abre mão de coisas suas para preservar o relacionamento. Você evita conflito. Você não diz quando está machucada porque não quer parecer difícil.\n\nE aos poucos você vai ficando menor, mais quieta, mais invisível.",
+      "Você tem o hábito de se tornar o que o outro precisa antes de descobrir o que você mesma precisa. E quando o relacionamento acaba, você se pergunta onde foi parar a versão de você que existia antes.",
     fullDescription:
-      "Até o homem não te ver mais de jeito nenhum. Seu Ímã do Cara Errado opera através de uma crença silenciosa: que amor exige que você se torne o que o outro precisa. Essa crença é invisível porque parece generosidade. Na prática, é autoapagamento.\n\nSua posição de Vênus revela uma capacidade genuína de conexão e empatia — que está sendo mal direcionada. Você está usando sua maior força para desaparecer.",
-    manType:
-      "Homens dominantes, centralizadores, que precisam ser o foco — e que, inconscientemente, se sentem bem com uma parceira que não disputa espaço.",
-    whyCycleRepeats:
-      "Você aprendeu que amor exige que você se torne o que o outro precisa. Essa crença é invisível porque parece generosidade.",
-    firstStep:
-      "Em qualquer conversa hoje, diga o que você realmente pensa — mesmo que seja diferente do que o outro pensa. Uma vez. Veja o que acontece.",
+      "Seu amor é genuíno e profundo, mas chegou num ponto onde amar significa ceder. Ceder opinião, tempo, planos, limites. Não de forma dramática, mas de forma gradual, quase imperceptível. Você se adapta tão bem que às vezes a pessoa com quem você está nem percebe o quanto você abriu mão. E você também não percebe, até que o custo acumulado se torna grande demais para ignorar. Sua alma gêmea é alguém que ativamente quer saber quem você é, não alguém que aceita a versão moldada que você apresenta.",
+    soulMateProfile:
+      "Seu mapa indica compatibilidade com alguém que faz perguntas, que nota quando você está se minimizando, que quer a versão real de você, não a versão conveniente.",
+    attractionPattern:
+      "Você é atraída por pessoas que têm uma presença forte e saber claro do que querem. Isso inicialmente parece segurança, mas pode criar uma dinâmica onde a voz deles ocupa o espaço onde a sua deveria estar.",
+    redFlags: [
+      "Homens com opiniões fortes que não perguntam o que você pensa",
+      "Relações onde você se sente vista, mas só em partes",
+      "Pessoas que te valorizam pelo que você faz, não por quem você é",
+    ],
+    cosmicWindow:
+      "Nos próximos 90 dias, seu mapa indica que uma conexão vai te convidar a ser inteira. Aceitar esse convite exige que você saiba o que inteira significa para você.",
   },
   {
     id: "4A",
-    slug: "viciada-intensidade",
-    name: "A que é viciada na intensidade",
-    scoreRange: [24, 30],
-    p7RequireCD: true,
+    slug: "viciada-em-intensidade",
+    name: "A que confunde intensidade com amor",
     teaser:
-      "Você já sentiu um amor tão intenso que tudo ficou perto e longe ao mesmo tempo. Você sabe o que é aquele frio na barriga que não passa, aquela mistura de euforia e ansiedade que parece atração mas é quase dependência.\n\nVocê já tentou se relacionar com homens calmos e estáveis e sentiu que faltava algo.",
+      "Você sente tudo com uma profundidade que poucos conseguem acompanhar. O problema é que essa intensidade se tornou o critério pelo qual você mede o amor, e nem sempre o que é intenso é o que é bom.",
     fullDescription:
-      "A verdade é que a intensidade que você confunde com amor é, na verdade, o seu sistema nervoso em modo de alerta. Não é amor que te faz sentir isso. É o perigo familiar que o seu corpo já aprendeu a chamar de amor.\n\nSeu Ímã do Cara Errado foi formado em um ambiente onde afeto era imprevisível — dado e tirado sem lógica aparente. Então estabilidade parece tédio. Caos parece paixão. Seu cérebro literalmente libera mais dopamina em relacionamentos instáveis porque aprendeu que é assim que amor funciona.",
-    manType:
-      "Homens com traços narcisistas ou com apego evitativo severo — que criam ciclos de aproximação e distância, que são intensos e depois somem.",
-    whyCycleRepeats:
-      "Seu cérebro literalmente libera mais dopamina em relacionamentos instáveis porque aprendeu que é assim que amor funciona.",
-    firstStep:
-      "Por 30 dias, não tome nenhuma decisão sobre relacionamento quando estiver no pico da euforia. Decida quando estiver calma. Euforia não é sinal verde. É sinal de que o padrão foi ativado.",
+      "Para você, amor que não dói um pouco não parece real. Amor que não tem tensão, drama ou o risco de perda parece vazio. Esse padrão não é fraqueza, é o resultado de ter aprendido que amor e conflito andam juntos. Que onde tem intensidade, tem conexão. A verdade é que seu coração é capaz de um amor enorme, mas está calibrado para sentir mais em ambientes de caos do que de paz. Sua alma gêmea não vai te fazer sofrer para provar que te ama. Mas ela vai precisar que você aprenda a reconhecer o amor que não machuca.",
+    soulMateProfile:
+      "Seu mapa indica que sua alma gêmea é alguém com profundidade emocional real, capaz de match para a sua intensidade, mas com estabilidade suficiente para que a conexão não se destrua com o próprio peso.",
+    attractionPattern:
+      "Você é fortemente atraída por pessoas que provocam reações físicas e emocionais intensas. A ansiedade que sente no começo de uma relação difícil muitas vezes parece maior do que o conforto que sente com alguém saudável.",
+    redFlags: [
+      "Homens que criam picos de euforia e vales de insegurança em ciclos regulares",
+      "Relações onde a reconciliação depois do conflito é a parte mais boa",
+      "Pessoas que te fazem sentir muito, mas raramente te fazem sentir segura",
+    ],
+    cosmicWindow:
+      "Nos próximos 90 dias, seu mapa indica que você vai encontrar uma conexão que é intensa e estável ao mesmo tempo. Seu desafio será não interpretar a estabilidade como falta de sentimento.",
   },
   {
     id: "4B",
-    slug: "nao-merece-o-que-pede",
-    name: "A que acredita que não merece o que pede",
-    scoreRange: [24, 30],
-    p7RequireCD: false,
+    slug: "a-que-nao-se-acredita-merecedora",
+    name: "A que não acredita que merece",
     teaser:
-      "Você sabe exatamente o tipo de relacionamento que quer. Você consegue descrever com detalhes. Mas na hora H, você aceita muito menos — e fica.\n\nVocê faz de conta que está bem com o que o homem oferece. Você diminui o que você quer para parecer razoável.",
+      "Por baixo de tudo, existe uma voz que diz que o amor que você quer é para as outras. Não para você. Essa voz não é verdade, mas ela tem sido tão constante que às vezes parece.",
     fullDescription:
-      "Você tem medo de pedir muito e assustar o homem que gosta. O resultado é que você constantemente está em relacionamentos que ficam abaixo do que você precisa.\n\nNo fundo, você carrega a crença de que amar demais ou pedir demais vai afastar as pessoas. Então você se torna menor do que é para caber no espaço que o outro abre. Seu Ímã do Cara Errado não atrai o homem errado — ele te faz aceitar menos do que você merece do homem que aparecer.",
-    manType:
-      "Homens que entregam o mínimo — não porque são necessariamente ruins, mas porque você nunca demonstrou que precisa de mais. Você treinou eles a te dar pouco.",
-    whyCycleRepeats:
-      "Você carrega a crença de que amar demais ou pedir demais vai afastar as pessoas.",
-    firstStep:
-      "Escreva em um papel o que você realmente quer em um relacionamento. Sem filtro, sem \"mas isso é muito\". Depois leia o que está escrito. Esse é o padrão que você está evitando pedir.",
+      "Você não duvida que o amor existe. Você duvida que existe para você especificamente. Essa crença se instalou de forma sutil, provavelmente bem antes de você ter consciência disso. E ela opera de formas invisíveis: você se sabota quando algo bom começa, você escolhe quem confirma a crença de que não é suficiente, você diminui o que sente para não ter que arriscar ser rejeitada num nível que realmente importe. Sua alma gêmea existe. O trabalho agora é se tornar capaz de recebê-la quando ela chegar.",
+    soulMateProfile:
+      "Seu mapa indica que sua alma gêmea vai chegar com uma clareza sobre você que vai contrastar com a voz interna. Alguém que te vê com precisão e escolhe você com consciência total disso.",
+    attractionPattern:
+      "Você tende a se aproximar de pessoas que te fazem trabalhar pela atenção delas, porque isso replica a sensação familiar de precisar provar que merece. E quando consegue a atenção, ainda não acredita completamente.",
+    redFlags: [
+      "Homens que te fazem sentir que você está sempre provando seu valor",
+      "Relações onde a insegurança é sua e a facilidade é dele",
+      "Pessoas que te valorizam menos do que você vale e você aceita porque parece mais real",
+    ],
+    cosmicWindow:
+      "Nos próximos 90 dias, seu mapa indica um período de clareza sobre o que você realmente merece. O que surgir nesse período vai precisar que você acredite nele antes de precisar de prova.",
   },
 ];
-
-export function getProfileBySlug(slug: string): Profile | undefined {
-  return profiles.find((p) => p.slug === slug);
-}

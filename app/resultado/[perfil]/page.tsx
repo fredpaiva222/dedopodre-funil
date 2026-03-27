@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { getProfileBySlug } from "@/data/profiles";
+import { profiles } from "@/data/profiles";
+import { venusSignDescriptions, VenusSign } from "@/lib/venus-calculator";
 import { StarField } from "@/components/ui/StarField";
 import { GlowDivider, VenusSymbol } from "@/components/ui/GlowDivider";
 import Link from "next/link";
@@ -13,25 +14,23 @@ export default function ResultadoPage({
   params: { perfil: string };
 }) {
   const searchParams = useSearchParams();
-  const [venusSign, setVenusSign] = useState<string | null>(null);
+  const [venusSign, setVenusSign] = useState<VenusSign | null>(null);
   const [isVerified, setIsVerified] = useState(false);
 
-  const profile = getProfileBySlug(params.perfil);
+  const profile = profiles.find((p) => p.slug === params.perfil);
 
   useEffect(() => {
-    // Verifica se veio do checkout com parâmetro verified
     const verified = searchParams.get("verified");
     if (verified === "true") {
-      localStorage.setItem(`sdp_purchased_${params.perfil}`, "true");
+      localStorage.setItem(`mag_purchased_${params.perfil}`, "true");
       setIsVerified(true);
     } else {
-      const stored = localStorage.getItem(`sdp_purchased_${params.perfil}`);
+      const stored = localStorage.getItem(`mag_purchased_${params.perfil}`);
       setIsVerified(stored === "true");
     }
 
-    // Recupera signo de Vênus do estado salvo
     try {
-      const saved = localStorage.getItem("sdp_quiz_state");
+      const saved = localStorage.getItem("mag_quiz_state");
       if (saved) {
         const state = JSON.parse(saved);
         if (state.venusSign) setVenusSign(state.venusSign);
@@ -54,17 +53,16 @@ export default function ResultadoPage({
           Esta página requer acesso pago.
         </p>
         <p className="font-sans text-sm text-text-secondary">
-          Você precisa completar o quiz e acessar o resultado completo.
+          Você precisa completar o quiz e desbloquear seu mapa completo.
         </p>
-        <Link
-          href="/"
-          className="font-sans text-sm text-gold underline underline-offset-4"
-        >
+        <Link href="/" className="font-sans text-sm text-gold underline underline-offset-4">
           Voltar ao início
         </Link>
       </div>
     );
   }
+
+  const venusDesc = venusSign ? venusSignDescriptions[venusSign] : null;
 
   return (
     <div className="min-h-screen bg-bg-deep relative overflow-hidden">
@@ -74,7 +72,7 @@ export default function ResultadoPage({
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(74,31,52,0.6) 0%, transparent 60%)",
+            "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(155,110,168,0.12) 0%, transparent 60%)",
         }}
       />
 
@@ -83,86 +81,72 @@ export default function ResultadoPage({
         <div className="text-center space-y-4">
           <VenusSymbol className="w-8 h-10 mx-auto opacity-60" />
           <p className="font-sans text-xs text-gold uppercase tracking-[0.3em]">
-            Resultado completo
+            Mapa da Alma Gêmea · Resultado completo
           </p>
           {venusSign && (
             <p className="font-sans text-sm text-text-secondary">
-              Vênus em{" "}
-              <span className="text-gold font-semibold">{venusSign}</span>
+              Vênus em <span className="text-gold font-semibold">{venusSign}</span>
             </p>
           )}
         </div>
 
-        {/* Nome do padrão */}
-        <div className="bg-gradient-result border border-gold/20 rounded-sm p-8 text-center space-y-3">
-          <p className="font-sans text-xs text-text-muted uppercase tracking-widest">
-            Seu padrão é
-          </p>
+        {/* Perfil Amoroso */}
+        <div className="bg-bg-card border border-gold/20 rounded-sm p-8 text-center space-y-3">
+          <p className="font-sans text-xs text-text-muted uppercase tracking-widest">Seu perfil</p>
           <h1 className="font-display text-3xl md:text-4xl text-gradient-gold leading-tight">
             {profile.name}
           </h1>
+          {venusDesc && (
+            <p className="font-sans text-sm text-text-secondary leading-relaxed italic border-t border-gold/10 pt-4 mt-4">
+              {venusDesc}
+            </p>
+          )}
         </div>
 
         <GlowDivider />
 
-        {/* Descrição completa */}
-        <div className="space-y-6">
-          <div className="space-y-4">
-            <h2 className="font-display text-xl text-text-primary">
-              O que isso significa
-            </h2>
-            <p className="font-sans text-sm text-text-secondary leading-relaxed">
-              {profile.teaser}
-            </p>
-            <p className="font-sans text-sm text-text-secondary leading-relaxed">
-              {profile.fullDescription}
-            </p>
-          </div>
+        {/* Padrão de Atração */}
+        <div className="space-y-4">
+          <h2 className="font-display text-xl text-text-primary">Padrão de Atração</h2>
+          <p className="font-sans text-sm text-text-secondary leading-relaxed">{profile.teaser}</p>
+          <p className="font-sans text-sm text-text-secondary leading-relaxed">{profile.fullDescription}</p>
+          <p className="font-sans text-sm text-text-secondary leading-relaxed">{profile.attractionPattern}</p>
+        </div>
 
-          <div className="gold-line" />
+        <div className="gold-line" />
 
-          {/* Tipo de homem */}
-          <div className="bg-bg-card rounded-sm p-5 space-y-2">
-            <p className="font-sans text-xs text-gold uppercase tracking-widest">
-              Tipo de homem que você atrai
-            </p>
-            <p className="font-sans text-sm text-text-secondary leading-relaxed">
-              {profile.manType}
-            </p>
-          </div>
+        {/* Perfil da Alma Gêmea */}
+        <div className="bg-bg-card border border-amethyst/20 rounded-sm p-5 space-y-2">
+          <p className="font-sans text-xs text-amethyst uppercase tracking-widest">Perfil da Alma Gêmea</p>
+          <p className="font-sans text-sm text-text-secondary leading-relaxed">{profile.soulMateProfile}</p>
+        </div>
 
-          {/* Por que repete */}
-          <div className="bg-bg-card rounded-sm p-5 space-y-2">
-            <p className="font-sans text-xs text-amethyst uppercase tracking-widest">
-              Por que o ciclo se repete
-            </p>
-            <p className="font-sans text-sm text-text-secondary leading-relaxed">
-              {profile.whyCycleRepeats}
-            </p>
-          </div>
+        {/* Red Flags */}
+        <div className="bg-bg-card border border-gold/10 rounded-sm p-5 space-y-3">
+          <p className="font-sans text-xs text-gold uppercase tracking-widest">Red Flags Astrológicos</p>
+          <ul className="space-y-2">
+            {profile.redFlags.map((flag, i) => (
+              <li key={i} className="flex gap-2 items-start">
+                <span className="text-gold mt-0.5 flex-shrink-0 text-xs">⚠</span>
+                <p className="font-sans text-xs text-text-secondary leading-relaxed">{flag}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-          {/* Primeiro passo */}
-          <div className="bg-bg-dark border border-gold/30 rounded-sm p-6 space-y-3">
-            <p className="font-sans text-xs text-gold uppercase tracking-widest">
-              Seu primeiro passo
-            </p>
-            <p className="font-display text-lg text-text-primary leading-snug">
-              {profile.firstStep}
-            </p>
-          </div>
+        {/* Janela Cósmica */}
+        <div className="bg-bg-dark border border-gold/30 rounded-sm p-6 space-y-3">
+          <p className="font-sans text-xs text-gold uppercase tracking-widest">Janela Cósmica 90 dias</p>
+          <p className="font-display text-base text-text-primary leading-snug">{profile.cosmicWindow}</p>
         </div>
 
         <GlowDivider />
 
-        {/* Rodapé */}
         <div className="text-center space-y-3">
           <p className="font-sans text-xs text-text-muted leading-relaxed">
             Salve essa página ou tire um print para consultar quando precisar.
           </p>
-          <Link
-            href="/"
-            className="font-sans text-xs text-gold underline underline-offset-4"
-          >
+          <Link href="/" className="font-sans text-xs text-gold underline underline-offset-4">
             Voltar ao início
           </Link>
         </div>
